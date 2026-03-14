@@ -61,6 +61,28 @@ const handleSubscriptionScheduleCanceled = async (
   });
 };
 
+const handleSubscriptionUpdated = async (data: Stripe.Subscription) => {
+  if (!data.customer) {
+    return;
+  }
+
+  const customerId =
+    typeof data.customer === "string" ? data.customer : data.customer.id;
+  const user = await getUserFromCustomerId(customerId);
+
+  if (!user) {
+    return;
+  }
+
+  analytics?.capture({
+    event: "User Plan Upgraded",
+    distinctId: user.id,
+    properties: {
+      plan: data.items.data[0]?.price.id,
+    },
+  });
+};
+
 export const POST = async (request: Request): Promise<Response> => {
   if (!(stripe && env.STRIPE_WEBHOOK_SECRET)) {
     return NextResponse.json({ message: "Not configured", ok: false });
@@ -88,6 +110,10 @@ export const POST = async (request: Request): Promise<Response> => {
       }
       case "subscription_schedule.canceled": {
         await handleSubscriptionScheduleCanceled(event.data.object);
+        break;
+      }
+      case "customer.subscription.updated": {
+        await handleSubscriptionUpdated(event.data.object);
         break;
       }
       default: {

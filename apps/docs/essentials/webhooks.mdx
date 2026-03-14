@@ -1,0 +1,55 @@
+---
+title: 'Webhooks'
+description: 'How the app handles Stripe payment webhook events'
+---
+
+## Overview
+
+The API processes Stripe webhook events at the `/webhooks/payments` endpoint. Each event is verified using the `STRIPE_WEBHOOK_SECRET` before being handled.
+
+## Handled Events
+
+The following Stripe events are currently handled:
+
+### `checkout.session.completed`
+
+Fired when a customer successfully completes a Stripe Checkout session.
+
+**Effect:** Tracks a `User Subscribed` analytics event tied to the customer's user account.
+
+```ts
+analytics.capture({
+  event: "User Subscribed",
+  distinctId: user.id,
+});
+```
+
+### `subscription_schedule.canceled`
+
+Fired when a subscription schedule is canceled.
+
+**Effect:** Tracks a `User Unsubscribed` analytics event tied to the customer's user account.
+
+```ts
+analytics.capture({
+  event: "User Unsubscribed",
+  distinctId: user.id,
+});
+```
+
+## Unhandled Events
+
+Any unhandled Stripe event type is logged as a warning and ignored. No error is returned to Stripe.
+
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `STRIPE_SECRET_KEY` | Your Stripe secret key (starts with `sk_`) |
+| `STRIPE_WEBHOOK_SECRET` | Webhook signing secret (starts with `whsec_`) |
+
+If either variable is missing, the endpoint returns `{ "message": "Not configured", "ok": false }` with a 200 status.
+
+## Customer Resolution
+
+Both handlers resolve the customer to a local user account by matching `stripeCustomerId` stored in the user's Clerk private metadata.
