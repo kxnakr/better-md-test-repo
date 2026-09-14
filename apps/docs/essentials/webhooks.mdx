@@ -37,6 +37,22 @@ analytics.capture({
 });
 ```
 
+### `customer.subscription.updated`
+
+Fired when a customer's subscription is updated.
+
+**Effect:** Tracks a `User Plan Upgraded` analytics event with the first subscription item's price ID as the `plan` property.
+
+```ts
+analytics.capture({
+  event: "User Plan Upgraded",
+  distinctId: user.id,
+  properties: {
+    plan: data.items.data[0]?.price.id,
+  },
+});
+```
+
 ## Unhandled Events
 
 Any unhandled Stripe event type is logged as a warning and ignored. No error is returned to Stripe.
@@ -52,4 +68,4 @@ If either variable is missing, the endpoint returns `{ "message": "Not configure
 
 ## Customer Resolution
 
-Both handlers resolve the customer to a local user account by matching `stripeCustomerId` stored in the user's Clerk private metadata.
+All three handlers resolve the customer to a local user account by matching `stripeCustomerId` stored in the user's Clerk private metadata.
