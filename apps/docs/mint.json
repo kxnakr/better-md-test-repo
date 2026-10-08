@@ -51,7 +51,19 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "pages": [
+        "introduction",
+        "quickstart",
+        "development"
+      ]
+    },
+    {
+      "group": "API",
+      "pages": [
+        "api/health",
+        "api/keep-alive",
+        "configuration/environment"
+      ]
     },
     {
       "group": "Essentials",
@@ -66,7 +78,9 @@
     },
     {
       "group": "API Documentation",
-      "pages": ["api-reference/introduction"]
+      "pages": [
+        "api-reference/introduction"
+      ]
     },
     {
       "group": "Endpoint Examples",

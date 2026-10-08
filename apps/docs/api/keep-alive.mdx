@@ -1,0 +1,14 @@
+---
+title: 'Database keep-alive'
+description: 'Cron endpoint that keeps the database warm'
+---
+
+`GET /cron/keep-alive` keeps serverless databases from going idle. Vercel Cron calls it on the schedule in `apps/api/vercel.json`.
+
+## What it does
+
+1. Creates a temporary `page` row named `cron-temp`.
+2. Deletes that row immediately.
+3. Returns status `200` with the plain-text body `OK`.
+
+The endpoint does not require authentication. It writes no lasting data.
