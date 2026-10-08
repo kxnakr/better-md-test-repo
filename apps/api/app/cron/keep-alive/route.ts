@@ -1,9 +1,11 @@
 import { database } from "@repo/database";
 
+const TEMP_PAGE_NAME = "cron-temp";
+
 export const GET = async () => {
   const newPage = await database.page.create({
     data: {
-      name: "cron-temp",
+      name: TEMP_PAGE_NAME,
     },
   });
 
