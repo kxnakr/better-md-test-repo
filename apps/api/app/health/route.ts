@@ -1,1 +1,5 @@
-export const GET = (): Response => new Response("OK", { status: 200 });
+export const GET = (): Response =>
+  Response.json(
+    { status: "ok", uptimeSeconds: Math.round(process.uptime()) },
+    { status: 200 }
+  );
