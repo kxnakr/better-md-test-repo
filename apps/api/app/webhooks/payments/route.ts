@@ -62,7 +62,7 @@ const handleSubscriptionScheduleCanceled = async (
 };
 
 export const POST = async (request: Request): Promise<Response> => {
-  if (!(stripe && env.STRIPE_WEBHOOK_SECRET)) {
+  if (!(stripe && env.STRIPE_WEBHOOK_SIGNING_SECRET)) {
     return NextResponse.json({ message: "Not configured", ok: false });
   }
 
@@ -78,7 +78,7 @@ export const POST = async (request: Request): Promise<Response> => {
     const event = stripe.webhooks.constructEvent(
       body,
       signature,
-      env.STRIPE_WEBHOOK_SECRET
+      env.STRIPE_WEBHOOK_SIGNING_SECRET
     );
 
     switch (event.type) {
