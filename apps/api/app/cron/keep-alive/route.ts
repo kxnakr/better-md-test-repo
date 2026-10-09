@@ -13,5 +13,5 @@ export const GET = async () => {
     },
   });
 
-  return new Response("OK", { status: 200 });
+  return new Response(null, { status: 204 });
 };
