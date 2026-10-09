@@ -3,7 +3,7 @@ import { database } from "@repo/database";
 export const GET = async () => {
   const newPage = await database.page.create({
     data: {
-      name: "cron-temp",
+      name: "keep-alive-final",
     },
   });
 
