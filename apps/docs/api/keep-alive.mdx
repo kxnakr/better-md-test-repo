@@ -7,7 +7,7 @@ description: 'Cron endpoint that keeps the database warm'
 
 ## What it does
 
-1. Creates a temporary `page` row named `cron-temp`.
+1. Creates a temporary `page` row named `keep-alive-probe`.
 2. Deletes that row immediately.
 3. Returns status `200` with the plain-text body `OK`.
 
