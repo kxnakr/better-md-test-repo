@@ -15,10 +15,13 @@ curl https://api.example.com/health
 
 ## Response
 
-Returns status `200` with the plain-text body `OK`.
+Returns status `200` with a JSON body. The `uptimeSeconds` field is the process uptime rounded to the nearest second.
 
-```text
-OK
+```json
+{
+  "status": "ok",
+  "uptimeSeconds": 3600
+}
 ```
 
 Use this endpoint for uptime monitors and load-balancer health probes.
