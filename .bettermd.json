@@ -1,8 +1,1 @@
-{
-  "version": 1,
-  "docsGlobs": ["apps/docs/api/**/*.mdx", "apps/docs/configuration/**/*.mdx"],
-  "ignorePaths": [],
-  "codeMappings": [
-    { "source": "apps/api/app/health/**", "target": "apps/docs/api/health.mdx" }
-  ]
-}
+{ "version": 1, "docsGlobs": ["apps/docs/**/*.mdx",], }
