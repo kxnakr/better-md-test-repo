@@ -1,0 +1,18 @@
+---
+title: 'API client'
+description: 'Call the API from TypeScript'
+---
+
+The `@repo/client` package wraps the HTTP API.
+
+```ts
+import { createClient } from "@repo/client";
+
+// Keep the key on the server.
+const client = createClient(process.env.API_KEY);
+
+const status = await client.health();
+console.log(status); // "OK"
+```
+
+Pass a second argument to point the client at another host.
