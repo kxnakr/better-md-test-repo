@@ -1,8 +1,17 @@
 {
   "version": 1,
-  "docsGlobs": ["apps/docs/api/**/*.mdx", "apps/docs/configuration/**/*.mdx"],
+  "docsGlobs": [
+    "apps/docs/api/**/*.mdx",
+    "apps/docs/configuration/**/*.mdx"
+  ],
   "ignorePaths": [],
   "codeMappings": [
-    { "source": "apps/api/app/health/**", "target": "apps/docs/api/health.mdx" }
+    {
+      "source": "apps/api/app/health/**",
+      "target": "apps/docs/api/health.mdx"
+    }
+  ],
+  "rules": [
+    "When an endpoint adds or changes a response header, its page in apps/docs/api/ must list the header under a \"Headers\" heading."
   ]
 }
