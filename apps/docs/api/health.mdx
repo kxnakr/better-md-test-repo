@@ -15,10 +15,6 @@ curl https://api.example.com/health
 
 ## Response
 
-Returns status `200` with the plain-text body `OK`.
-
-```text
-OK
-```
+Returns status `200` with a JSON object containing `status: "ok"` and the process `uptime`.
 
 Use this endpoint for uptime monitors and load-balancer health probes.
