@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "codeMappings": [
+    { "source": "**", "target": "/apps/docs/configuration/environment.mdx" }
+  ]
+}
