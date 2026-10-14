@@ -15,10 +15,16 @@ curl https://api.example.com/health
 
 ## Response
 
-Returns status `200` with the plain-text body `OK`.
+Returns status `200` with the JSON body:
 
-```text
-OK
+```json
+{
+  "status": "ok"
+}
 ```
+
+### Headers
+
+- `Content-Type: application/json`
 
 Use this endpoint for uptime monitors and load-balancer health probes.
