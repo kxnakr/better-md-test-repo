@@ -9,6 +9,18 @@ export const cleanFileName = (file: string) =>
 
 export const shellOption = process.platform === "win32";
 
+const failureMessage = (
+  command: string,
+  args: string[],
+  result: ReturnType<typeof spawnSync>
+) => {
+  const invocation = `${command} ${args.join(" ")}`;
+  const stderr = result.stderr?.toString().trim();
+  return stderr
+    ? `Command failed: ${invocation}\n${stderr}`
+    : `Command failed with exit code ${result.status}: ${invocation}`;
+};
+
 export const run = (
   command: string,
   args: string[],
@@ -25,11 +37,7 @@ export const run = (
   }
 
   if (result.status !== 0) {
-    const stderr = result.stderr?.toString().trim();
-    const message = stderr
-      ? `Command failed: ${command} ${args.join(" ")}\n${stderr}`
-      : `Command failed with exit code ${result.status}: ${command} ${args.join(" ")}`;
-    throw new Error(message);
+    throw new Error(failureMessage(command, args, result));
   }
 
   return result;
