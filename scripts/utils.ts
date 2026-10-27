@@ -9,6 +9,7 @@ export const cleanFileName = (file: string) =>
 
 export const shellOption = process.platform === "win32";
 
+/** The error text for a command that exited non-zero, with its stderr when there is any. */
 const failureMessage = (
   command: string,
   args: string[],
